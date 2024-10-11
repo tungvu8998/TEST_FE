@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/jquery-ui-1.14.0/jquery-ui.css">
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.3.917/styles/kendo.common.min.css">
+    <script src="assets/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.3.917/js/kendo.all.min.js"></script>
+    <script src="assets/jquery-ui-1.14.0/jquery-ui.min.js"></script>
+    <title>Quản lý sinh viên</title>
+</head>
+
+<body>
+    <header>
+        <img src="image/ptit.png" alt="Logo PTIT">
+        <h1>HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG <br>
+            <p>Post and Telecommunications Institute of Technology</p>
+        </h1>
+        <div class="user-info">
+            <span class="username">Tài khoản: Nguyễn Văn A |
+                <a href="#" class="btn1"> Đăng xuất |</a>
+                <a href="#" class="btn1"> Trợ giúp </a>
+            </span>
+        </div>
+        <div class="date" id="currentDate"></div>
+    </header>
+    <div class="navbar">
+        <a href="#"><i class="fa fa-archive"></i><strong> Giới thiệu</strong></a>
+        <a href="#"><i class="fa fa-folder-open"></i><strong>Đào tạo</strong></a>
+        <a href="#"><i class="fa fa-tasks"></i><strong>Tin tức & sự kiện</strong></a>
+        <a href="#"><i class="fa fa-sticky-note"></i><strong>Khoa học công nghệ</strong></a>
+
+        <div class="dropdown">
+            <button class="dropbtn"><i class="fa fa-server"></i><strong>Sinh viên</strong>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#thongTinSinhVien">Thông tin cá nhân</a>
+                <a href="#">Lịch học</a>
+                <a href="#">Kết quả học tập</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <aside>
+            <ul>
+                <li><a href="#thongTinSinhVien" id="showGrid">Thông tin sinh viên</a></li>
+            </ul>
+        </aside>
+
+        <section id="gridSection" style="display: none;">
+            <h2>Quản lý sinh viên</h2>
+            <div class="action-buttons">
+                <button id="addButton" class="btn"><i class="fa fa-plus-square"></i>Thêm</button>
+                <button id="editButton" class="btn"><i class="fa fa-pencil"></i>Sửa</button>
+                <button id="deleteButton" class="btn"><i class="fa fa-trash-o"></i>Xóa</button>
+            </div>
+
+            <div>
+                <label for="search">Tìm kiếm:</label>
+                <input type="text" id="search" placeholder="Nhập từ khóa...">
+            </div>
+
+            <div id="grid"></div>
+        </section>
+
+        <div id="dialog" title="Thêm sinh viên" style="display:none;">
+            <form id="studentForm" class="custom-form">
+                <table>
+                    <tr>
+                        <td><label for="hoTen">Họ và tên: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <textarea id="hoTen" name="hoTen" placeholder="Vũ Văn A" required cols="40" rows="1"></textarea>
+                            <span class="error-message" id="hoTenError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="gioiTinh">Giới tính: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <div id="gioiTinh">
+                                <label>
+                                    <input type="radio" name="gioiTinh" value="Nam" required> Nam
+                                </label>
+                                <label>
+                                    <input type="radio" name="gioiTinh" value="Nữ"> Nữ
+                                </label>
+                                <label>
+                                    <input type="radio" name="gioiTinh" value="Khác"> Khác
+                                </label>
+                            </div>
+                            <span class="error-message" id="gioiTinhError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="namSinh">Năm sinh: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <input type="date" id="namSinh" name="namSinh" required>
+                            <span class="error-message" id="namSinhError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="soCCCD">Số căn cước công dân: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <input type="text" id="soCCCD" name="soCCCD" placeholder="0310 xxxx xxxx" required>
+                            <span class="error-message" id="soCCCDError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="noiSinh">Nơi sinh: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <textarea id="noiSinh" name="noiSinh" placeholder="Hải Phòng" required cols="40" rows="1"></textarea>
+                            <span class="error-message" id="noiSinhError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="diaChiLienLac">Địa chỉ liên lạc: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <textarea id="diaChiLienLac" name="diaChiLienLac" placeholder="Trung Văn, Nam Từ Liêm, Hà Nội" required cols="40" rows="1"></textarea>
+                            <span class="error-message" id="diaChiError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="soDienThoai">Số điện thoại: <span style="color: red;">*</span></label></td>
+                        <td>
+                            <input type="text" id="soDienThoai" name="soDienThoai" placeholder="0123 456 789" required>
+                            <span class="error-message" id="soDienThoaiError"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="fileUpload">Đính kèm file:</label></td>
+                        <td>
+                            <input type="file" id="fileUpload" name="fileUpload" accept="application/pdf, image/*">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Chuyên ngành:</label></td>
+                        <td>
+                            <input type="checkbox" id="khoaHoc1" name="khoaHoc" value="CNTT">
+                            <label for="khoaHoc1">CNTT</label>
+                            <input type="checkbox" id="khoaHoc2" name="khoaHoc" value="Kinh tế">
+                            <label for="khoaHoc2">Kinh tế</label>
+                            <input type="checkbox" id="khoaHoc3" name="khoaHoc" value="Xây dựng">
+                            <label for="khoaHoc3">Xây dựng</label>
+                        </td>
+                    </tr>
+                </table>
+                <div class="note" style="color: red; margin-top: 10px;">
+                    <strong>Ghi chú:</strong> Các trường có dấu (*) là bắt buộc phải nhập.
+                </div>
+                <div id="errorMessages" style="color: red; margin-top: 10px;"></div>
+            </form>
+            
+
+        <script src="scripts.js" defer></script>
+</body>
+
+</html>

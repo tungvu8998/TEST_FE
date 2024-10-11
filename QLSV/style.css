@@ -1,0 +1,261 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Thiết lập phong cách cơ bản cho body */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f5f5f5;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  background-image: url("image/2.png");
+  color: #333;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+header img {
+  height: 80px;
+  margin-right: 20px;
+}
+
+header h1 {
+  font-size: 20px;
+  color: rgb(229, 24, 24);
+}
+
+header p {
+  font-size: 15px;
+  color: black;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center; /* Căn giữa các phần tử */
+  align-items: center; /* Căn giữa theo trục dọc */
+  background-color: #333;
+  position: relative; /* Đảm bảo dropdown hiển thị phía trên */
+  z-index: 1; /* Đảm bảo thanh điều hướng có độ ưu tiên cao */
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+  text-align: center;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Dropdown content (ẩn đi khi chưa được hover) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Style cho các link bên trong dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Hiển thị dropdown khi hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.user-info {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.username {
+  margin-right: 15px;
+}
+
+/* Nút đăng xuất */
+.btn1 {
+  padding: 0;
+  margin-right: 5px;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn1:hover {
+  background-color: gray;
+}
+
+.container {
+  display: flex;
+  margin: 0;
+  max-width: 100%;
+  padding-left: 0;
+}
+
+/* Sidebar */
+aside {
+  width: 250px;
+  background-color: white;
+  margin-right: 10px;
+}
+
+aside ul {
+  background-color: #FF9999;
+  list-style: none;
+  padding-left: 0;
+}
+
+aside ul li {
+  border: 1px solid rgb(214, 211, 211);
+  outline: solid thin rgb(236, 232, 232);
+}
+
+aside ul li a {
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+
+aside :active {
+  color: red;
+}
+
+/* Section chính */
+section {
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+section h2 {
+  margin-bottom: 10px;
+}
+
+/* Nút hành động */
+.action-buttons {
+  margin-bottom: 15px;
+}
+
+.btn {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Bảng */
+table {
+  width: 100%; /* Chiều rộng bảng */
+  border-collapse: collapse; /* Xóa khoảng cách giữa các ô */
+  margin-bottom: 20px; /* Khoảng cách dưới bảng */
+  border: none; /* Bỏ viền cho bảng */
+}
+
+table th,
+table td {
+  padding: 2px; /* Khoảng cách trong ô */
+  text-align: left; /* Căn chỉnh văn bản bên trái */
+  border: none; /* Bỏ viền cho ô */
+}
+
+table th {
+  background-color: #f0f0f0; /* Màu nền cho tiêu đề bảng */
+  width: 50px; /* Chiều rộng tiêu đề thu hẹp thêm */
+}
+
+/* Chiều rộng cho các trường nhập liệu */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+input[type="date"],
+textarea,
+select {
+  width: calc(100% - 20px); /* Chiếm hết chiều rộng còn lại trừ padding */
+  padding: 5px; /* Thêm padding cho các trường */
+  border: 1px solid #ccc; /* Đường viền cho các trường */
+  border-radius: 4px; /* Bo góc cho các trường */
+  overflow: hidden; /* Ẩn phần vượt ra ngoài */
+}
+
+textarea {
+  resize: none;
+}
+
+/* Xử lý thông báo lỗi */
+.error-message {
+  display: block; /* Đảm bảo hiển thị như một khối */
+  color: red; /* Màu chữ đỏ */
+  font-size: 15px; /* Kích thước chữ thông báo lỗi */
+  clear: both; /* Đảm bảo không bị ảnh hưởng bởi float */
+  overflow: hidden; /* Ẩn phần vượt ra ngoài */
+  max-height: 20px; /* Giới hạn chiều cao thông báo lỗi */
+  line-height: 1.2; /* Đặt chiều cao dòng */
+}
+
+/* Thêm khoảng cách cho ghi chú và các thông báo lỗi */
+.note {
+  color: red; /* Màu chữ cho ghi chú */
+  margin-top: 10px; /* Khoảng cách trên ghi chú */
+  overflow: hidden; /* Ẩn phần vượt ra ngoài */
+}
