@@ -96,7 +96,7 @@ $(document).ready(function () {
     $("#grid")
       .data("kendoGrid")
       .dataSource.filter({
-        logic: "or", // Tìm kiếm theo logic "hoặc"
+        logic: "or", 
         filters: [
           { field: "hoTen", operator: "contains", value: value },
           { field: "soCCCD", operator: "contains", value: value },
@@ -109,7 +109,7 @@ $(document).ready(function () {
     $("#gridSection").toggle();
   });
 
-  // Xử lý sự kiện thêm sinh viên
+
   $("#addButton").click(function () {
     $("#dialog").dialog({
       modal: true,
@@ -118,7 +118,6 @@ $(document).ready(function () {
       title: "Thêm sinh viên",
       buttons: {
         Lưu: function () {
-          // Kiểm tra các trường bắt buộc
           if (!validateForm()) {
             // alert("Vui lòng điền đầy đủ các trường bắt buộc!");
             return;
@@ -146,7 +145,6 @@ $(document).ready(function () {
           $("#grid").data("kendoGrid").refresh();
         },
         "Lưu & Đóng": function () {
-          // Kiểm tra các trường bắt buộc
           if (!validateForm()) {
             // alert("Vui lòng điền đầy đủ các trường bắt buộc!");
             return;
@@ -184,7 +182,6 @@ $(document).ready(function () {
     });
   });
 
-  // Xử lý sự kiện sửa sinh viên
   $("#editButton").click(function () {
     var grid = $("#grid").data("kendoGrid");
     var selectedRows = grid.select();
@@ -192,7 +189,6 @@ $(document).ready(function () {
     if (selectedRows.length > 0) {
       var dataItem = grid.dataItem(selectedRows[0]);
 
-      // Điền thông tin sinh viên hiện tại vào form
       $("#hoTen").val(dataItem.hoTen);
       $("#gioiTinh input[value='" + dataItem.gioiTinh + "']").prop(
         "checked",
@@ -203,8 +199,6 @@ $(document).ready(function () {
       $("#noiSinh").val(dataItem.noiSinh);
       $("#diaChiLienLac").val(dataItem.diaChiLienLac);
       $("#soDienThoai").val(dataItem.soDienThoai);
-
-      // Đánh dấu các checkbox khóa học đã chọn
       $("input[name='khoaHoc']").prop("checked", false);
       if (dataItem.khoaHoc) {
         dataItem.khoaHoc.forEach(function (khoa) {
@@ -215,7 +209,6 @@ $(document).ready(function () {
         });
       }
 
-      // Hiển thị dialog chỉnh sửa
       $("#dialog").dialog({
         modal: true,
         width: 1366,
@@ -223,12 +216,9 @@ $(document).ready(function () {
         title: "Sửa thông tin sinh viên",
         buttons: {
           "Cập nhật": function () {
-            // Kiểm tra tính hợp lệ trước khi cập nhật
             if (!validateForm()) {
-              return; // Dừng lại nếu không hợp lệ
+              return; 
             }
-
-            // Lấy giá trị từ form và cập nhật dataItem
             dataItem.set("hoTen", $("#hoTen").val());
             dataItem.set("gioiTinh", $("input[name='gioiTinh']:checked").val());
             dataItem.set("namSinh", $("#namSinh").val());
@@ -236,23 +226,17 @@ $(document).ready(function () {
             dataItem.set("noiSinh", $("#noiSinh").val());
             dataItem.set("diaChiLienLac", $("#diaChiLienLac").val());
             dataItem.set("soDienThoai", $("#soDienThoai").val());
-
-            // Xử lý file upload (nếu cần)
             dataItem.set(
               "fileUpload",
               $("#fileUpload").val()
                 ? $("#fileUpload").val().split("\\").pop()
                 : ""
             );
-
-            // Lấy danh sách các khóa học đã chọn
             var selectedKhoaHoc = [];
             $("input[name='khoaHoc']:checked").each(function () {
               selectedKhoaHoc.push($(this).val());
             });
             dataItem.set("khoaHoc", selectedKhoaHoc);
-
-            // Đồng bộ dữ liệu
             grid.dataSource.sync();
             grid.refresh();
 
@@ -288,8 +272,6 @@ $(document).ready(function () {
 
 function validateForm() {
   var isValid = true;
-
-  // Kiểm tra số điện thoại (phải là số và độ dài 10-11 ký tự)
   var phone = $("#soDienThoai").val();
   var phoneRegex = /^[0-9]{10,11}$/;
   if (!phoneRegex.test(phone)) {
@@ -305,32 +287,30 @@ function validateForm() {
 
   if (!$("input[name='gioiTinh']:checked").val()) {
     isValid = false;
-    $("#gioiTinhError").text("Bạn phải chọn giới tính."); // Hiển thị thông báo lỗi
+    $("#gioiTinhError").text("Bạn phải chọn giới tính."); 
   } else {
-    $("#gioiTinhError").text(""); // Xóa thông báo lỗi
-  }
-  // Kiểm tra số CCCD (chỉ chứa số và có độ dài 12 ký tự)
+    $("#gioiTinhError").text(""); 
   var cccd = $("#soCCCD").val();
   var cccdRegex = /^[0-9]{12}$/;
   if (!cccdRegex.test(cccd)) {
     isValid = false;
     $("#soCCCD").addClass("error");
-    $("#soCCCDError").text("Số CCCD phải có 12 chữ số."); // Cần thêm phần tử cho thông báo này trong HTML
+    $("#soCCCDError").text("Số CCCD phải có 12 chữ số.");
   } else {
     $("#soCCCD").removeClass("error");
-    $("#soCCCDError").text(""); // Xóa thông báo lỗi
+    $("#soCCCDError").text(""); 
   }
 
-  // Kiểm tra ngày sinh
   var birthDate = $("#namSinh").val();
   if (new Date(birthDate) == "Invalid Date" || birthDate === "") {
     isValid = false;
     $("#namSinh").addClass("error");
-    $("#namSinhError").text("Vui lòng nhập ngày sinh hợp lệ."); // Cần thêm phần tử cho thông báo này trong HTML
+    $("#namSinhError").text("Vui lòng nhập ngày sinh hợp lệ."); 
   } else {
     $("#namSinh").removeClass("error");
-    $("#namSinhError").text(""); // Xóa thông báo lỗi
+    $("#namSinhError").text(""); 
   }
+
   function validateRequiredField(fieldId, errorId) {
     var value = $(fieldId).val().trim();
     if (value === "") {
